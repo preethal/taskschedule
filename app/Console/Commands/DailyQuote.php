@@ -41,13 +41,10 @@ class DailyQuote extends Command
     {
 
       $quotes = [
-            'Mahatma Gandhi' => 'Live as if you were to die tomorrow. Learn as if you were to live forever.',
-            'Friedrich Nietzsche' => 'That which does not kill us makes us stronger.',
-            'Theodore Roosevelt' => 'Do what you can, with what you have, where you are.',
-            'Oscar Wilde' => 'Be yourself; everyone else is already taken.',
-            'William Shakespeare' => 'This above all: to thine own self be true.',
-            'Napoleon Hill' => 'If you cannot do great things, do small things in a great way.',
-            'Milton Berle' => 'If opportunity doesn’t knock, build a door.'
+            'Hello,
+
+            Good Morning!'
+           
         ];
          
         // Setting up a random word
@@ -57,7 +54,7 @@ class DailyQuote extends Command
         $users = User::all();
         foreach ($users as $user) {
             Mail::raw("{$key} -> {$data}", function ($mail) use ($user) {
-                $mail->from('digamber@positronx.com');
+                $mail->from('test@gmail.com');
                 $mail->to($user->email)
                     ->subject('Daily New Quote!');
             });
