@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Pagination\Paginator;
+use Blade;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,5 +26,11 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        Blade::directive('my_method', function ($value) {
+            
+            $value = "| ".$value." |";
+
+            return "<h1 style='color: green'> $value </h1>";
+        });
     }
 }

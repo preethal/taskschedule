@@ -13,6 +13,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::get('directive', function () {
+      
+    $body = '';
+  
+    if(request()->filled('body')){
+        $body = request()->body;        
+    }
+  
+    return view('welcome', compact('body'));
 });

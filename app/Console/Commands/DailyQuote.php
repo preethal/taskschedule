@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendMail;
 use App\Models\User;
+use App\Models\Quotes;
 
 class DailyQuote extends Command
 {
@@ -39,21 +40,23 @@ class DailyQuote extends Command
      */
     public function handle()
     {
-
-      $quotes = [
-            'Hello,
-
-            Good Morning!'
+      $quotes=Quotes::all();
+      foreach($quotes as $quote)
+      {
+         $quotes = [         
+            
+                  $quote['wishes']."\n".
+                  $quote['best_quotes'],
            
         ];
-         
+      }         
         // Setting up a random word
         $key = array_rand($quotes);
         $data = $quotes[$key];
          
         $users = User::all();
         foreach ($users as $user) {
-            Mail::raw("{$key} -> {$data}", function ($mail) use ($user) {
+            Mail::raw("{$data}", function ($mail) use ($user) {
                 $mail->from('test@gmail.com');
                 $mail->to($user->email)
                     ->subject('Daily New Quote!');
